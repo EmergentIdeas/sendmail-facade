@@ -3,6 +3,8 @@ const fs = require('fs')
 const filog = require('filter-log')
 const through2 = require('through2')
 const child_process = require('child_process')
+const utf8 = require('utf8')
+const quotedPrintable = require('quoted-printable');
 
 let log = filog('sendmail-facade')
 
@@ -16,6 +18,7 @@ let processor = function (input) {
 
 	let email = processor.createMessage(input)
 	email = processor.processCommandLineArgs(email)
+	email = processor.endcodeDecode(email)
 
 	let senderOptions = processor.loadSenderOptions(email)
 
@@ -87,6 +90,18 @@ processor.processCommandLineArgs = function (email) {
 	return email
 }
 
+processor.endcodeDecode = function(email) {
+	// Some senders will transfer encode the message before it gets to us.
+	// Because of the way nodemailer sends things, they show up as literals, so
+	// we'll need to decode them first.
+	// https://www.w3.org/Protocols/rfc1341/5_Content-Transfer-Encoding.html
+	// https://en.wikipedia.org/wiki/Quoted-printable
+	// 
+	if(email.html.indexOf('=0D') || email.html.indexOf('=0A') || email.html.indexOf('=3D') ) {
+		email.html = utf8.decode(quotedPrintable.decode(email.html))
+	}
+	return email
+}
 
 processor.loadSenderOptions = function (email) {
 	let senderOptions = null
