@@ -1,6 +1,6 @@
 {
   "name": "sendmail-facade",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A sendmail compatible command which uses node code to send email as a relay",
   "main": "sendmail.js",
   "scripts": {
@@ -9,6 +9,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EmergentIdeas/sendmail-facade.git"
+  },
+  "bin": {
+    "sendmail-facade": "./sendmail.js",
+    "sendmail-facade-install-defaults": "./set-default-config.js"
   },
   "keywords": [
     "sendmail",
@@ -20,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/EmergentIdeas/sendmail-facade/issues"
   },
-  "homepage": "https://github.com/EmergentIdeas/sendmail-facade#readme"
+  "homepage": "https://github.com/EmergentIdeas/sendmail-facade#readme",
+  "dependencies": {
+    "console-in-transformer": "^1.0.3",
+    "filter-log": "0.0.5",
+    "nodemailer": "^6.3.1"
+  }
 }
