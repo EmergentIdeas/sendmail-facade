@@ -1,0 +1,24 @@
+{
+  "name": "sendmail-facade",
+  "version": "1.0.0",
+  "description": "A sendmail compatible command which uses node code to send email as a relay",
+  "main": "sendmail.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmergentIdeas/sendmail-facade.git"
+  },
+  "keywords": [
+    "sendmail",
+    "email",
+    "relay"
+  ],
+  "author": "Dan Kolz (Emergent Ideas)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmergentIdeas/sendmail-facade/issues"
+  },
+  "homepage": "https://github.com/EmergentIdeas/sendmail-facade#readme"
+}
