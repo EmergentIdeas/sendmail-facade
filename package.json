@@ -1,6 +1,6 @@
 {
   "name": "sendmail-facade",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A sendmail compatible command which uses node code to send email as a relay",
   "main": "sendmail.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "filter-log": "0.0.5",
     "nodemailer": "^6.3.1",
     "quoted-printable": "^1.0.1",
-    "through2": "^3.0.1"
+    "through2": "^3.0.1",
+    "utf8": "^3.0.0"
   }
 }
