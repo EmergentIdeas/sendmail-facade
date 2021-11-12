@@ -5,6 +5,7 @@ const through2 = require('through2')
 const child_process = require('child_process')
 const utf8 = require('utf8')
 const quotedPrintable = require('quoted-printable');
+const isSpam = require('./is-spam')
 
 let log = filog('sendmail-facade')
 
@@ -21,8 +22,19 @@ let processor = function (input) {
 	email = processor.endcodeDecode(email)
 
 	let senderOptions = processor.loadSenderOptions(email)
+	
+	if(isSpam(email, senderOptions)) {
+		// by default, to syslog
+		log.info({
+			message: 'Email dropped because it was suspected spam',
+			from: email.from,
+			to: email.to
+		})
+	}
+	else {
+		processor.sendEmail(email, senderOptions)
+	}
 
-	processor.sendEmail(email, senderOptions)
 
 	return ''
 
